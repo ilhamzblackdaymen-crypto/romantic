@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Hi Beautiful — A Love Letter</title>
+    <meta name="description" content="A cinematic, interactive love letter." />
+
+    <!-- Google Fonts: Cormorant Garamond (display/serif) + Outfit (body/sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ============================= -->
+    <!-- LOADING SCREEN                -->
+    <!-- ============================= -->
+    <div class="loader" id="loader">
+      <div class="loader-heart">
+        <svg viewBox="0 0 32 29" class="loader-heart-svg">
+          <path
+            d="M16 28C16 28 1 18.5 1 8.9C1 3.9 5 1 9 1C12 1 14.5 3 16 6C17.5 3 20 1 23 1C27 1 31 3.9 31 8.9C31 18.5 16 28 16 28Z"
+          />
+        </svg>
+      </div>
+      <p class="loader-text">
+        loading something beautiful<span class="dots"
+          ><span>.</span><span>.</span><span>.</span></span
+        >
+      </p>
+    </div>
+
+    <!-- Cursor glow (desktop only, added via JS) -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Floating hearts overlay layer (used across sections via JS) -->
+    <div class="floating-hearts-layer" id="floatingHeartsLayer"></div>
+
+    <!-- Progress bar for page scroll -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- ============================= -->
+    <!-- SECTION 1 — OPENING SCREEN    -->
+    <!-- ============================= -->
+    <section class="section hero" id="hero">
+      <canvas class="sky-canvas" id="skyCanvas"></canvas>
+      <div class="aurora">
+        <span class="aurora-blob a1"></span>
+        <span class="aurora-blob a2"></span>
+        <span class="aurora-blob a3"></span>
+      </div>
+      <div class="noise-overlay"></div>
+
+      <div class="hero-content" data-parallax>
+        <p class="eyebrow reveal-up" data-delay="0">for you, always</p>
+        <h1 class="hero-title reveal-up" data-delay="1">
+          Hi Beautiful <span class="heart-inline">❤</span>
+        </h1>
+        <p class="hero-subtitle reveal-up" data-delay="2">
+          There is something I want to tell you...
+        </p>
+        <button
+          class="btn btn-primary btn-glow magnetic reveal-up"
+          data-delay="3"
+          id="openHeartBtn"
+        >
+          <span>Open My Heart</span>
+          <svg viewBox="0 0 24 24" class="btn-arrow">
+            <path
+              d="M12 4v16m0 0l-6-6m6 6l6-6"
+              stroke="currentColor"
+              stroke-width="1.6"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div class="scroll-hint reveal-up" data-delay="4">
+        <span></span>
+        <p>scroll</p>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- SECTION 2 — OUR STORY         -->
+    <!-- ============================= -->
+    <section class="section story" id="story">
+      <div class="section-inner">
+        <p class="section-eyebrow reveal-up">chapter one</p>
+        <h2 class="section-title reveal-up">Our Story</h2>
+        <p class="section-lede reveal-up">
+          Every love has a beginning. Here is ours, one moment at a time.
+        </p>
+
+        <div class="timeline">
+          <div class="timeline-line">
+            <span class="timeline-line-fill" id="timelineFill"></span>
+          </div>
+
+          <article class="timeline-card reveal-left">
+            <div class="timeline-photo ph-1"><span>photo 1</span></div>
+            <div class="timeline-text">
+              <span class="timeline-date">March 14, 2022</span>
+              <h3>The First Hello</h3>
+              <p>
+                A coffee shop, a spilled drink, and a laugh that changed
+                everything. I didn't know yet that I'd just met my favorite
+                person.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-card reveal-right">
+            <div class="timeline-text">
+              <span class="timeline-date">June 2, 2022</span>
+              <h3>The First Date</h3>
+              <p>
+                Nervous hands and too much to say. We talked until the
+                restaurant closed and neither of us wanted to leave.
+              </p>
+            </div>
+            <div class="timeline-photo ph-2"><span>photo 2</span></div>
+          </article>
+
+          <article class="timeline-card reveal-left">
+            <div class="timeline-photo ph-3"><span>photo 3</span></div>
+            <div class="timeline-text">
+              <span class="timeline-date">December 24, 2022</span>
+              <h3>The First "I Love You"</h3>
+              <p>
+                Under fairy lights, on the quietest street in the city, three
+                words that made everything feel certain.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-card reveal-right">
+            <div class="timeline-text">
+              <span class="timeline-date">Today</span>
+              <h3>Still Choosing You</h3>
+              <p>
+                Every single day since, again and again, without hesitation.
+              </p>
+            </div>
+            <div class="timeline-photo ph-4"><span>photo 4</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- SECTION 3 — LOVE COUNTER      -->
+    <!-- ============================= -->
+    <section class="section counter-section" id="counter">
+      <div class="glow-backdrop"></div>
+      <div class="section-inner">
+        <p class="section-eyebrow reveal-up">since day one</p>
+        <h2 class="section-title reveal-up">Loving You For</h2>
+
+        <div class="counter-grid reveal-up">
+          <div class="counter-card glass">
+            <span class="counter-number" id="countDays">000</span>
+            <span class="counter-label">Days</span>
+          </div>
+          <div class="counter-card glass">
+            <span class="counter-number" id="countHours">00</span>
+            <span class="counter-label">Hours</span>
+          </div>
+          <div class="counter-card glass">
+            <span class="counter-number" id="countMinutes">00</span>
+            <span class="counter-label">Minutes</span>
+          </div>
+          <div class="counter-card glass">
+            <span class="counter-number" id="countSeconds">00</span>
+            <span class="counter-label">Seconds</span>
+          </div>
+        </div>
+        <p class="counter-footnote reveal-up">and counting, forever</p>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- SECTION 4 — GALLERY           -->
+    <!-- ============================= -->
+    <section class="section gallery-section" id="gallery">
+      <div class="section-inner">
+        <p class="section-eyebrow reveal-up">chapter two</p>
+        <h2 class="section-title reveal-up">Little Moments</h2>
+        <p class="section-lede reveal-up">
+          A few frames from a story still being written.
+        </p>
+
+        <div class="gallery-grid" id="galleryGrid">
+          <div
+            class="gallery-item g-tall"
+            data-caption="Golden hour, your favorite bench"
+          >
+            <span>01</span>
+          </div>
+          <div
+            class="gallery-item g-short"
+            data-caption="The trip we almost cancelled"
+          >
+            <span>02</span>
+          </div>
+          <div class="gallery-item g-med" data-caption="Rainy day, warm coffee">
+            <span>03</span>
+          </div>
+          <div
+            class="gallery-item g-tall"
+            data-caption="Your laugh, mid-sentence"
+          >
+            <span>04</span>
+          </div>
+          <div
+            class="gallery-item g-short"
+            data-caption="Sunday mornings, always"
+          >
+            <span>05</span>
+          </div>
+          <div class="gallery-item g-med" data-caption="The night sky you love">
+            <span>06</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lightbox -->
+      <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+          ✕
+        </button>
+        <div class="lightbox-frame">
+          <div class="lightbox-image" id="lightboxImage"></div>
+          <p class="lightbox-caption" id="lightboxCaption"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- SECTION 5 — LOVE LETTER       -->
+    <!-- ============================= -->
+    <section class="section letter-section" id="letter">
+      <div class="section-inner">
+        <p class="section-eyebrow reveal-up">chapter three</p>
+        <h2 class="section-title reveal-up">A Letter For You</h2>
+        <p class="section-lede reveal-up">
+          Some things are easier to write than to say out loud.
+        </p>
+
+        <div class="envelope-wrap reveal-up">
+          <div class="envelope" id="envelope">
+            <div class="envelope-back"></div>
+            <div class="envelope-letter" id="envelopeLetter">
+              <p class="letter-line" id="letterText"></p>
+            </div>
+            <div class="envelope-flap"></div>
+            <div class="envelope-seal">
+              <span>❤</span>
+            </div>
+          </div>
+          <p class="envelope-hint" id="envelopeHint">tap to open</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- SECTION 6 — MUSIC PLAYER      -->
+    <!-- ============================= -->
+    <section class="section music-section" id="musicSection">
+      <div class="section-inner">
+        <p class="section-eyebrow reveal-up">our song</p>
+        <h2 class="section-title reveal-up">Play It Again</h2>
+
+        <div class="music-card glass reveal-up">
+          <div class="music-art-wrap">
+            <div class="music-art" id="musicArt">
+              <span>♪</span>
+            </div>
+          </div>
+          <div class="music-info">
+            <h3 class="music-title">Our Song</h3>
+            <p class="music-artist">the one that always plays</p>
+
+            <div class="music-progress">
+              <span class="music-time" id="musicCurrent">0:00</span>
+              <div class="music-bar" id="musicBar">
+                <div class="music-bar-fill" id="musicBarFill"></div>
+              </div>
+              <span class="music-time" id="musicDuration">0:00</span>
+            </div>
+
+            <div class="music-controls">
+              <button class="music-btn" id="musicPlayBtn" aria-label="Play">
+                <svg viewBox="0 0 24 24" id="playIcon">
+                  <path d="M8 5v14l11-7z" fill="currentColor" />
+                </svg>
+              </button>
+              <div class="equalizer" id="equalizer">
+                <span></span><span></span><span></span><span></span
+                ><span></span>
+              </div>
+              <div class="volume-wrap">
+                <svg viewBox="0 0 24 24" class="volume-icon">
+                  <path d="M3 10v4h4l5 5V5L7 10H3z" fill="currentColor" />
+                </svg>
+                <input
+                  type="range"
+                  id="volumeSlider"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value="0.6"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="music-note">
+          — add your own song at <code>assets/music/our-song.mp3</code> —
+        </p>
+        <audio
+          id="audioPlayer"
+          src="assets/music/our-song.mp3"
+          preload="metadata"
+          loop
+        ></audio>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- SECTION 7 — REASONS WHY       -->
+    <!-- ============================= -->
+    <section class="section reasons-section" id="reasons">
+      <div class="section-inner">
+        <p class="section-eyebrow reveal-up">chapter four</p>
+        <h2 class="section-title reveal-up">
+          12 Reasons, Among Countless Others
+        </h2>
+        <p class="section-lede reveal-up">
+          Tap each card. There's a reason waiting underneath.
+        </p>
+
+        <div class="reasons-grid" id="reasonsGrid">
+          <!-- Cards injected by JS from a data array, see script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- SECTION 8 — MEMORY TIMELINE   -->
+    <!-- ============================= -->
+    <section class="section memory-section" id="memories">
+      <div class="section-inner section-inner--wide">
+        <p class="section-eyebrow reveal-up">chapter five</p>
+        <h2 class="section-title reveal-up">Memories, In Order</h2>
+        <p class="section-lede reveal-up">
+          Scroll sideways through the highlights.
+        </p>
+      </div>
+
+      <div class="h-timeline-wrap">
+        <div class="h-timeline-track" id="hTimelineTrack">
+          <span class="h-timeline-line"></span>
+
+          <div class="h-timeline-item">
+            <span class="h-dot"></span>
+            <div class="h-card">
+              <span class="h-year">2022</span>
+              <h4>We Met</h4>
+              <p>A chance encounter, perfectly timed.</p>
+            </div>
+          </div>
+          <div class="h-timeline-item">
+            <span class="h-dot"></span>
+            <div class="h-card">
+              <span class="h-year">2022</span>
+              <h4>First Trip</h4>
+              <p>Lost the map, found each other.</p>
+            </div>
+          </div>
+          <div class="h-timeline-item">
+            <span class="h-dot"></span>
+            <div class="h-card">
+              <span class="h-year">2023</span>
+              <h4>Moved In</h4>
+              <p>Two coffee mugs, one small kitchen.</p>
+            </div>
+          </div>
+          <div class="h-timeline-item">
+            <span class="h-dot"></span>
+            <div class="h-card">
+              <span class="h-year">2023</span>
+              <h4>Adopted Milo</h4>
+              <p>Our first "child," four paws and chaos.</p>
+            </div>
+          </div>
+          <div class="h-timeline-item">
+            <span class="h-dot"></span>
+            <div class="h-card">
+              <span class="h-year">2024</span>
+              <h4>Met The Family</h4>
+              <p>Nervous introductions, instant warmth.</p>
+            </div>
+          </div>
+          <div class="h-timeline-item">
+            <span class="h-dot"></span>
+            <div class="h-card">
+              <span class="h-year">Now</span>
+              <h4>Right Here</h4>
+              <p>Building something that lasts.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- SECTION 9 — DREAM TOGETHER    -->
+    <!-- ============================= -->
+    <section class="section dreams-section" id="dreams">
+      <div class="section-inner">
+        <p class="section-eyebrow reveal-up">chapter six</p>
+        <h2 class="section-title reveal-up">Everything Still Ahead</h2>
+        <p class="section-lede reveal-up">
+          The future looks better with you in it.
+        </p>
+
+        <div class="dreams-grid">
+          <div class="dream-card glass reveal-up" data-delay="0">
+            <div class="dream-icon">✈</div>
+            <h3>Travel</h3>
+            <p>Every country on our list, one stamp at a time.</p>
+          </div>
+          <div class="dream-card glass reveal-up" data-delay="1">
+            <div class="dream-icon">💍</div>
+            <h3>Marriage</h3>
+            <p>A small ceremony, a lifetime promise.</p>
+          </div>
+          <div class="dream-card glass reveal-up" data-delay="2">
+            <div class="dream-icon">🏡</div>
+            <h3>A Home</h3>
+            <p>Somewhere quiet, with a garden and morning light.</p>
+          </div>
+          <div class="dream-card glass reveal-up" data-delay="3">
+            <div class="dream-icon">👨‍👩‍👧</div>
+            <h3>Family</h3>
+            <p>A little chaos, a lot of love.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- SECTION 10 — GIFT BOX         -->
+    <!-- ============================= -->
+    <section class="section gift-section" id="gift">
+      <div class="section-inner">
+        <p class="section-eyebrow reveal-up">just for you</p>
+        <h2 class="section-title reveal-up">One More Thing</h2>
+        <p class="section-lede reveal-up">Go ahead. Open it.</p>
+
+        <div class="gift-wrap reveal-up">
+          <div class="gift-box" id="giftBox">
+            <div class="gift-lid" id="giftLid">
+              <span class="gift-ribbon-v"></span>
+              <span class="gift-ribbon-h"></span>
+              <span class="gift-bow">🎀</span>
+            </div>
+            <div class="gift-body">
+              <span class="gift-ribbon-v"></span>
+            </div>
+            <div class="gift-glow"></div>
+          </div>
+          <p class="gift-message" id="giftMessage">
+            You mean everything to me.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- SECTION 11 — THE QUESTION     -->
+    <!-- ============================= -->
+    <section class="section question-section" id="question">
+      <div class="question-glow"></div>
+      <div class="section-inner">
+        <div class="big-heart" id="bigHeart">
+          <svg viewBox="0 0 32 29">
+            <path
+              d="M16 28C16 28 1 18.5 1 8.9C1 3.9 5 1 9 1C12 1 14.5 3 16 6C17.5 3 20 1 23 1C27 1 31 3.9 31 8.9C31 18.5 16 28 16 28Z"
+            />
+          </svg>
+        </div>
+        <h2 class="question-title reveal-up">Will You Stay With Me Forever?</h2>
+        <div class="question-buttons reveal-up">
+          <button class="btn btn-primary btn-glow magnetic" id="yesBtn">
+            YES ❤️
+          </button>
+          <button class="btn btn-outline magnetic" id="absolutelyBtn">
+            ABSOLUTELY ❤️
+          </button>
+        </div>
+        <p class="question-answer" id="questionAnswer"></p>
+      </div>
+      <canvas class="confetti-canvas" id="confettiCanvas"></canvas>
+    </section>
+
+    <!-- ============================= -->
+    <!-- SECTION 12 — ENDING           -->
+    <!-- ============================= -->
+    <section class="section ending-section" id="ending">
+      <canvas class="sky-canvas" id="endingCanvas"></canvas>
+      <div class="section-inner">
+        <p class="ending-quote reveal-up">
+          "Of all the hearts in all the world, I'm endlessly grateful mine found
+          yours."
+        </p>
+        <h2 class="ending-title reveal-up">Thank You For Being You</h2>
+        <p class="ending-sub reveal-up">
+          To many more chapters, written together.
+        </p>
+
+        <footer class="site-footer reveal-up">
+          <p>
+            made with <span class="heart-inline">❤</span> — customize this
+            template freely
+          </p>
+        </footer>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
